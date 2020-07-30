@@ -135,11 +135,18 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 
 	}
 
-	private Department instantiateDepartment(ResultSet rs) throws SQLException {
+	private Department instantiateDepartment(ResultSet rs)  {
+		try {
 		Department dep = new Department();
 		dep.setId(rs.getInt("DepartmentId"));
 		dep.setName(rs.getString("DepName"));
 		return dep;
+		} 
+		catch (SQLException e) {
+			System.out.println("Database offline");
+			return null;
+			}
+		}
 	}
 
-}
+
